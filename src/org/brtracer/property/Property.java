@@ -14,7 +14,6 @@ public class Property {
 	}
 
 	/**
-	 * »ý¼ºÀÚ.
 	 * @param bugFilePath
 	 * @param sourceCodeDir
 	 * @param workDir
@@ -52,6 +51,6 @@ public class Property {
 	//newly added
 	public String CommitHash;
 	public int OriginFileCount;
-	public int Offset; // for AspectJ    //old  Aspectj_filename_offset;
+	public int Offset; 
 	public String Project;
 }

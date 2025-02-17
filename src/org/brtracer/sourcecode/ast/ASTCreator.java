@@ -16,7 +16,6 @@ public class ASTCreator {
 		this.getFileContent(file.getAbsolutePath());
 	}
 
-	//获取文件内容
 	public void getFileContent(String absoluteFilePath) {
 		try {
 			StringBuffer contentBuffer = new StringBuffer();
@@ -31,7 +30,6 @@ public class ASTCreator {
 		}
 	}
 	
-	//获取文件对应的CompilationUnit
 	public CompilationUnit getCompilationUnit() {
 		ASTParser parser = ASTParser.newParser(AST.JLS3);
 		parser.setSource(content.toCharArray());

@@ -4,7 +4,7 @@ import java.util.TreeSet;
 
 
 /**
- * Public property로 bug클래스 재정의
+ * Public property�
  * @author Zeck
  *
  */

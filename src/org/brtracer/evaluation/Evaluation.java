@@ -67,7 +67,6 @@ public class Evaluation {
 	}
 
 	/**
-	 * 메인 작업 함수
 	 * 
 	 * @throws IOException
 	 */
@@ -175,11 +174,9 @@ public class Evaluation {
 	
 	public int printEvaluationResult(Integer _bugID, float[] _finalscore) throws IOException
 	{
-		//Score에 따라 파일이 정렬된 결과를 가져옴
 		Rank[] sortedRank = this.getSortedRank(_finalscore);
 		int ErrorCount=0;
 		
-		// 실제 버그리포트에서 수정되었던 파일목록을 불러옴. (실제 정답 셋)
 		TreeSet<String> fileSet = fixTable.get(_bugID);
 		Iterator<String> fileIt = fileSet.iterator();
 		Hashtable<Integer, String> fileIdTable = new Hashtable<Integer, String>();
@@ -195,10 +192,8 @@ public class Evaluation {
 			fileIdTable.put(fileId, fileName);
 		}
 				
-		//정답셋에 있는 파일들이 몇번째에 랭크되었는지 결과를 보여줌. (writer는 추천된 결과 전체를 보여줌)
 		FileWriter writer = new FileWriter(recommandedPath + _bugID + ".txt");
 		for (int i = 0; i < sortedRank.length; i++) {
-			// rank.ID는 파일 ID
 			Rank rank = sortedRank[i];
 			
 			if(nameTable.containsKey(rank.id)){

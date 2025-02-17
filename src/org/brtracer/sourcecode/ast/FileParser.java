@@ -16,23 +16,12 @@ public class FileParser {
 
 	private CompilationUnit cu = null;
 
-	/**
-	 * ?��?��?��?��?��몌옙?��?��?��?��?��ava?��?��?��?��?��?��?���??��?��?��CompilationUnit
-	 * 
-	 * @param file:java ?��?��?��?��
-	 *            
-	 */
 	public FileParser(File file) {
 		ASTCreator creator = new ASTCreator();
 		creator.getFileContent(file);
 		cu = creator.getCompilationUnit();
 	}
 
-	/**
-	 * ?��?��?��?��java?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��
-	 * 
-	 * @return ?��?��?��?��?��?��?��?��?��?��?��?��
-	 */
 	public int getLinesOfCode() {
 		this.deleteNoNeededNode();
 		String[] lines = cu.toString().split("\n");
@@ -46,11 +35,7 @@ public class FileParser {
 		return len;
 	}
 
-	/**
-	 * ?��?��?��?��?��?��?��?��?��?��캇占?��?��캔占?��?��?���?
-	 * 
-	 * @return ?��?��?��?��?��?��캇占?��?��캔占?��?��?��?��?��?��?��?��?���?
-	 */
+	
 	public String[] getContent() {
 		String[] tokensInSourceCode = Splitter.splitSourceCode(this
 				.deleteNoNeededNode());
@@ -68,22 +53,14 @@ public class FileParser {
 		return content.split(" ");
 	}
 
-	/**
-	 * ?��?��?��?��?��?��?��?��?��?��?��?��?��곤옙?��?��?��
-	 * 
-	 * @return ?��?��?��?��?��?��
-	 */
+	
 	public String getPackageName() {
 
 		return cu.getPackage() == null ? "" : cu.getPackage().getName()
 				.getFullyQualifiedName();
 	}
 
-	/**
-	 * ?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��뤄옙?��?��?��?��?��?��
-	 * 
-	 * @return ?��?��?��?��?��?��?��?��?��?��?��?��?�占?��?��?��?���?
-	 */
+	
 	private String getAllMethodName() {
 		ArrayList<String> methodNameList = new ArrayList<String>();
 		for (int i = 0; i < cu.types().size(); i++) {
@@ -103,11 +80,7 @@ public class FileParser {
 
 	}
 
-	/**
-	 * ?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��?��
-	 * 
-	 * @return ?��?��?��?��?��?��?��?��?��?�占?��?��?��?���?
-	 */
+	
 	private String getAllClassName() {
 		ArrayList<String> classNameList = new ArrayList<String>();
 		for (int i = 0; i < cu.types().size(); i++) {
@@ -122,11 +95,7 @@ public class FileParser {
 		return allClassName.trim();
 	}
 
-	/**
-	 * ?�占?��?��?��?��?��?��?��?��?�옙?��?��?��狼占?��?��?��?��?��?��
-	 * 
-	 * @return ?��?��?��?��?��?��?��?��?��뤄옙?��?���?
-	 */
+	
 	private String deleteNoNeededNode() {
 		cu.accept(new ASTVisitor() {
 			public boolean visit(AnnotationTypeDeclaration node) {

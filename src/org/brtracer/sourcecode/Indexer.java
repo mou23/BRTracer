@@ -46,7 +46,7 @@ public class Indexer {
 		}
 		writerDoc.close();
 
-		//CodeCorpus (segmented)  정보를 기반으로 
+		//CodeCorpus (segmented)
 		BufferedReader reader = new BufferedReader(new FileReader(workDir + "CodeCorpus.txt"));
 		String line = null;
 		FileWriter writer = new FileWriter(workDir + "TermInfo.txt");
@@ -110,7 +110,6 @@ public class Indexer {
 
 			String[] words = values[1].split(" ");
 			
-			//문서별 유일한 어휘들의 집합을 생성
 			TreeSet<String> wordSet = new TreeSet<String>();
 			for (String word : words) {
 				if (!word.trim().equals("") && !wordSet.contains(word)) {
@@ -118,7 +117,6 @@ public class Indexer {
 				}
 			}
 			
-			//word별 count 생성
 			for (String word : wordSet) {
 				if (countTable.containsKey(word)) {
 					Integer count = countTable.get(word);

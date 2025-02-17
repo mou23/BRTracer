@@ -48,7 +48,7 @@ public class XMLCreator {
 
 		}
 		XMLWriter output;
-		// 输出格式化
+
 		OutputFormat format = OutputFormat.createPrettyPrint();
 		format.setEncoding("ISO-8859-1");
 		try {

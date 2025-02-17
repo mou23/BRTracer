@@ -129,7 +129,6 @@ public class CodeCorpusCreator {
 	}
 
 	/**
-	 * 지정된 파일에 대한 corpus 생성 부가적으로 import 정보를 출력도 함.
 	 * 
 	 * @param file
 	 * @param writeImport
@@ -156,14 +155,13 @@ public class CodeCorpusCreator {
 //		}
 //		/* ************************** */
 
-		// import에 대한 정보 출력. (왜할까???)
+
 		writeImport.write(fileName + "\t");
 		parser.getImport(writeImport);
 		writeImport.write(lineSeparator);
 
 //		fileName = fileName.substring(0, fileName.lastIndexOf("."));
 
-		// full source code에 대한 corpus 생성.
 		String[] content = parser.getContent();
 		StringBuffer contentBuf = new StringBuffer();
 		for (String word : content) {
@@ -176,7 +174,6 @@ public class CodeCorpusCreator {
 		}
 		String sourceCodeContent = contentBuf.toString();
 
-		// class and method name에 대한 corpus생성.
 		String[] classNameAndMethodName = parser.getClassNameAndMethodName();
 		StringBuffer nameBuf = new StringBuffer();
 		for (String word : classNameAndMethodName) {
@@ -186,7 +183,6 @@ public class CodeCorpusCreator {
 		}
 		String names = nameBuf.toString();
 
-		// corpus 객체 생성
 		Corpus corpus = new Corpus();
 		corpus.setJavaFilePath(file.getAbsolutePath());
 		corpus.setJavaFileFullClassName(fileName);
