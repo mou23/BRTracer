@@ -6,17 +6,17 @@ import org.brtracer.property.Property;
 
 public class BRTracer {
 	public static void main(String[] args) {
-		args = new String[10];
-		args[0]="-b";
-		args[1]="D:/FL/dataset/eclipse-updated-data.xml";
-		args[2]="-p";
-		args[3]="eclipse";
-		args[4]="-w";
-		args[5]="D:/FL/dataset/temp/"; //mandatory slash
-		args[6]="-s";
-		args[7]="D:/FL/dataset/eclipse/"; //mandatory slash
-		args[8]="-n";
-		args[9]="eclipse";
+//		args = new String[10];
+//		args[0]="-b";
+//		args[1]="D:/FL/dataset/eclipse-updated-data.xml";
+//		args[2]="-p";
+//		args[3]="eclipse";
+//		args[4]="-w";
+//		args[5]="D:/FL/dataset/temp/"; //mandatory slash
+//		args[6]="-s";
+//		args[7]="D:/FL/dataset/eclipse/"; //mandatory slash
+//		args[8]="-n";
+//		args[9]="eclipse";
 		
         /* You need to manually specify three program arguments in Eclipse or Intellij before running */
 		try {
