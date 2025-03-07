@@ -6,19 +6,20 @@ import org.brtracer.property.Property;
 
 public class BRTracer {
 	public static void main(String[] args) {
-//		args = new String[10];
-//		args[0]="-b";
-//		args[1]="D:/FL/dataset/eclipse-updated-data.xml";
-//		args[2]="-p";
-//		args[3]="eclipse";
-//		args[4]="-w";
-//		args[5]="D:/FL/dataset/temp/"; //mandatory slash
-//		args[6]="-s";
-//		args[7]="D:/FL/dataset/eclipse/"; //mandatory slash
-//		args[8]="-n";
-//		args[9]="eclipse";
+		args = new String[12];
+		args[0]="-b";
+		args[1]="D:/FL/dataset/aspectj-updated-data.xml";
+		args[2]="-p";
+		args[3]="aspectj";
+		args[4]="-w";
+		args[5]="D:/FL/dataset/temp/"; //mandatory slash
+		args[6]="-s";
+		args[7]="D:/FL/dataset/aspectj/"; //mandatory slash
+		args[8]="-n";
+		args[9]="aspectj-modified";
+		args[10]="-i";
+		args[11]="non-bugs-id-aspectj.txt";
 		
-        /* You need to manually specify three program arguments in Eclipse or Intellij before running */
 		try {
 			if (args.length == 0)
 				throw null;
@@ -44,6 +45,7 @@ public class BRTracer {
 				+ "-a\tindicates the alpha value for combining vsmScore and simiScore\r\n"
 				+ "-w\tindicates the working directory\r\n"
 				+ "-n\tindicates the working name (this uses for result file name.)\r\n"
+				+ "-i\tindicates the file name containing invalid bug ids\r\n"
 				+ "  \tOn the below of the {working directory}\r\n"
 				+ "  \tThis program will make temp directory : BRTracer_{working name}\\\r\n"
 				+ "  \t                and final result file : BRTracer_{working name}_output.txt";
@@ -62,6 +64,7 @@ public class BRTracer {
 		String outputFile = "";
 		String workingPath = "";
 		String projectStr = "";
+		String invalidBugFile = "";
 		
 		while (i < args.length - 1) {
 			if (args[i].equals("-b")) {
@@ -85,6 +88,9 @@ public class BRTracer {
 			} else if (args[i].equals("-n")) {
 				i++;
 				projectStr = args[i];
+			} else if (args[i].equals("-i")) {
+				i++;
+				invalidBugFile = args[i];
 			}
 			i++;
 		}
@@ -120,7 +126,12 @@ public class BRTracer {
 		if (file.getFreeSpace() / 1024 / 1024 / 1024 < 2) {
 			System.out.println("Not enough free disk space, please ensure your current disk space are bigger than 2G.");
 			isLegal = false;
-		}	
+		}
+		
+		if ((invalidBugFile.equals("")) || (invalidBugFile == null)) {
+			isLegal = false;
+			System.out.println("you must indicate the file name containing invalid bug ids");
+		}
 		
 		//Check this state.
 		if (!isLegal) {
@@ -138,7 +149,7 @@ public class BRTracer {
 			dir.mkdirs();
 		outputFile = workingPath.substring(0, workingPath.length() - 1) + "_output.txt";
 	
-		Property.createInstance(projectStr.toUpperCase(), bugFilePath, sourceCodeDir, workingPath, alpha, outputFile);
+		Property.createInstance(projectStr.toUpperCase(), bugFilePath, sourceCodeDir, workingPath, alpha, outputFile, invalidBugFile);
 
 		return isLegal;
 	}

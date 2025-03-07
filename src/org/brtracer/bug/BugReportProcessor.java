@@ -9,35 +9,51 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.brtracer.property.Property;
+import org.brtracer.utils.InvalidBugListProcessor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 
 public class BugReportProcessor {
 	
 	public ArrayList<ArrayList<Bug>> getBugReports() {
 		ArrayList<Bug> bugs = parseXML();
 		int totalSize = bugs.size();
-		int splitIndex = (int) Math.ceil(totalSize * 0.6);
-
-		List<Bug> firstPart = bugs.subList(0, splitIndex);
-		List<Bug> secondPart = bugs.subList(splitIndex, totalSize);
-
-		ArrayList<Bug> training_bugs = new ArrayList<>(firstPart);
-		ArrayList<Bug> test_bugs = new ArrayList<>(secondPart);
-		System.out.println("size of test bugs: " + test_bugs.size());
-
-		ArrayList<ArrayList<Bug>> arrayListOfBugs = new ArrayList<>();
-
-		for (Bug bug : test_bugs) {
-			ArrayList<Bug> newList = new ArrayList<>(training_bugs); 
-			newList.add(bug);
-			System.out.println(bug.bugId + "\n" + bug.set);
-			arrayListOfBugs.add(newList);
-		}
-		
-
+        int splitIndex = (int) Math.ceil(totalSize * 0.6);
+        
+        List<Bug> firstPart = bugs.subList(0, splitIndex);
+        List<Bug> secondPart = bugs.subList(splitIndex, totalSize);
+        
+        List<String> invalidBugIDs = InvalidBugListProcessor.getInvalidBugIDs();
+        
+        ArrayList<Bug> training_bugs = new ArrayList<>();
+        
+        for (Bug bug : firstPart) {
+        	if (invalidBugIDs.contains(bug.getBugId()))
+				continue;
+			else
+				training_bugs.add(bug);
+        }
+        ArrayList<Bug> test_bugs = new ArrayList<>();
+        
+        for (Bug bug : secondPart) {
+        	if (invalidBugIDs.contains(bug.getBugId()))
+				continue;
+			else
+				test_bugs.add(bug);
+        }
+        System.out.println("size of test bugs: " + test_bugs.size());
+        
+        ArrayList<ArrayList<Bug>> arrayListOfBugs = new ArrayList<>();
+        
+        for (Bug bug : test_bugs) {
+            ArrayList<Bug> newList = new ArrayList<>(training_bugs); 
+            newList.add(bug);
+            arrayListOfBugs.add(newList);
+        }
+        
 		return arrayListOfBugs;
 	}
 

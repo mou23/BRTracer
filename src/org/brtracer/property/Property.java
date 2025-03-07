@@ -4,9 +4,9 @@ public class Property {
 
 	private static Property p = null;
 
-	public static void createInstance(String projectName, String bugFilePath, String sourceCodeDir,String workDir,float alpha,String outputFile) {
+	public static void createInstance(String projectName, String bugFilePath, String sourceCodeDir, String workDir, float alpha, String outputFile, String invalidBugFile) {
 		if (p == null)
-			p = new Property(projectName, bugFilePath, sourceCodeDir,workDir,alpha,outputFile);
+			p = new Property(projectName, bugFilePath, sourceCodeDir,workDir,alpha,outputFile, invalidBugFile);
 	}
 
 	public static Property getInstance() {
@@ -21,12 +21,14 @@ public class Property {
 	 * @param outputFile
 	 * @param offset
 	 */
-	private Property(String projectName, String bugFilePath, String sourceCodeDir,String workDir,float alpha,String outputFile) {
+	private Property(String projectName, String bugFilePath, String sourceCodeDir, String workDir, float alpha, String outputFile, String invalidBugFile) {
 		this.BugFilePath = bugFilePath;
 		this.SourceCodeDir = sourceCodeDir;
 		this.WorkDir=workDir;
 		this.Alpha=alpha;
 		this.OutputFile=outputFile;
+		this.InvalidBugFile = invalidBugFile;
+		
         this.Project = projectName;
         this.Offset = sourceCodeDir.length();
         this.CommitHash = null;
@@ -53,4 +55,5 @@ public class Property {
 	public int OriginFileCount;
 	public int Offset; 
 	public String Project;
+	public final String InvalidBugFile;
 }
