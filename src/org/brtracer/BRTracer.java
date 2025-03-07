@@ -6,19 +6,19 @@ import org.brtracer.property.Property;
 
 public class BRTracer {
 	public static void main(String[] args) {
-		args = new String[12];
-		args[0]="-b";
-		args[1]="D:/FL/dataset/aspectj-updated-data.xml";
-		args[2]="-p";
-		args[3]="aspectj";
-		args[4]="-w";
-		args[5]="D:/FL/dataset/temp/"; //mandatory slash
-		args[6]="-s";
-		args[7]="D:/FL/dataset/aspectj/"; //mandatory slash
-		args[8]="-n";
-		args[9]="aspectj-modified";
-		args[10]="-i";
-		args[11]="non-bugs-id-aspectj.txt";
+//		args = new String[12];
+//		args[0]="-b";
+//		args[1]="D:/FL/dataset/aspectj-updated-data.xml";
+//		args[2]="-p";
+//		args[3]="aspectj";
+//		args[4]="-w";
+//		args[5]="D:/FL/dataset/temp/"; //mandatory slash
+//		args[6]="-s";
+//		args[7]="D:/FL/dataset/aspectj/"; //mandatory slash
+//		args[8]="-n";
+//		args[9]="aspectj-modified";
+//		args[10]="-i";
+//		args[11]="non-bugs-id-aspectj.txt";
 		
 		try {
 			if (args.length == 0)
